@@ -6,6 +6,12 @@
 </head>
 <body>
 	<input id="file" type="file" accept="image/*" />
-	111
+	<script type="text/javascript">
+	var file = document.getElementById('#file');
+
+	file.addEventListener('change',function(){
+		alert(this.files[0])
+	})
+	</script>
 </body>
 </html>

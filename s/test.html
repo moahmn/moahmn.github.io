@@ -5,13 +5,14 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
 </head>
 <body>
-	<input id="file" type="file" accept="image/*" />
+	<input id="inputField" type="file" accept="image/*" />
 	<script type="text/javascript">
-	var file = document.getElementById('file');
-
-	file.addEventListener('change',function(){
-		alert(this.files[0])
-	},false)
+	var inputElement = document.getElementById("inputField");
+	inputElement.addEventListener("change", handleFiles, false);
+	function handleFiles() {
+	  var fileList = this.files;
+	  console.log(fileList); 
+	}
 	</script>
 </body>
 </html>

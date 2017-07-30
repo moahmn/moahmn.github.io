@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>console对象在ie下undefined的BUG以及解决方案 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们在平常写JS的时候经常都需要在控制台输出一些信息(利用console或者alert)来帮助我们了解程序是否按照我们的设想在执行。今天要记录的是console这个对象在ie下为undefined的bug;
+最近在公司的一个项目发现一个很诡异的bug,一直拖到最后才解决，因为实在想不出是为什么。测试给我提了一个bug，在ie8/ie9下一些数据不能够正常回显，而在我的电脑上都是正常显示的（所以说程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="console对象在ie下undefined的BUG以及解决方案">
+<meta property="og:url" content="http://yoursite.com/2016/10/15/console对象在ie下undefined的BUG以及解决方案/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我们在平常写JS的时候经常都需要在控制台输出一些信息(利用console或者alert)来帮助我们了解程序是否按照我们的设想在执行。今天要记录的是console这个对象在ie下为undefined的bug;
+最近在公司的一个项目发现一个很诡异的bug,一直拖到最后才解决，因为实在想不出是为什么。测试给我提了一个bug，在ie8/ie9下一些数据不能够正常回显，而在我的电脑上都是正常显示的（所以说程">
+<meta property="og:updated_time" content="2016-10-15T16:53:22.508Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="console对象在ie下undefined的BUG以及解决方案">
+<meta name="twitter:description" content="我们在平常写JS的时候经常都需要在控制台输出一些信息(利用console或者alert)来帮助我们了解程序是否按照我们的设想在执行。今天要记录的是console这个对象在ie下为undefined的bug;
+最近在公司的一个项目发现一个很诡异的bug,一直拖到最后才解决，因为实在想不出是为什么。测试给我提了一个bug，在ie8/ie9下一些数据不能够正常回显，而在我的电脑上都是正常显示的（所以说程">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-console对象在ie下undefined的BUG以及解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/15/console对象在ie下undefined的BUG以及解决方案/" class="article-date">
+  <time datetime="2016-10-15T15:28:39.000Z" itemprop="datePublished">2016-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      console对象在ie下undefined的BUG以及解决方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们在平常写JS的时候经常都需要在控制台输出一些信息(利用console或者alert)来帮助我们了解程序是否按照我们的设想在执行。今天要记录的是console这个对象在ie下为undefined的bug;</p>
+<p>最近在公司的一个项目发现一个很诡异的bug,一直拖到最后才解决，因为实在想不出是为什么。测试给我提了一个bug，在ie8/ie9下一些数据不能够正常回显，而在我的电脑上都是正常显示的（所以说程序员总是会说在我电脑上的是正常的啊），之后过去测试的电脑上看不正常，回我这边还是正常，这就见鬼了。之后测试突然说你不要按F12啊，不按F12的这一次BUG就出来了。之后反复测试都发现只要是开启了控制台，就不会有BUG，而不开启，BUG就立刻显示出来了。<br><strong>查资料后发现console这个对象在ie8/ie9下是undefined（更低版本没有测试，应该也是undefined）,直到你打开控制台时，这个对象才会被创建，之后删掉了console.log，ie下的bug就解决了，因为在控制台未开启的时候console对象未被定义，这时候程序就会报错进而阻塞后面代码的运行，但开启控制台，console对象被创建，之后的代码也能够被正常运行;</strong></p>
+<p>这里虽说删除console.log能够解决问题，但是如果其他浏览器还需要在控制台查看这样就很不方便了。<br>下面有两种方案能够让我们在ie依然能够正常使用console这个对象不报错</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">方案一：</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">console</span> == <span class="string">"undefined"</span>) &#123;</div><div class="line">    <span class="keyword">this</span>.console = &#123;<span class="attr">log</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">方案二：</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> methods = [<span class="string">"assert"</span>, <span class="string">"cd"</span>, <span class="string">"clear"</span>, <span class="string">"count"</span>, <span class="string">"countReset"</span>,</div><div class="line">    <span class="string">"debug"</span>, <span class="string">"dir"</span>, <span class="string">"dirxml"</span>, <span class="string">"error"</span>, <span class="string">"exception"</span>, <span class="string">"group"</span>, <span class="string">"groupCollapsed"</span>,</div><div class="line">    <span class="string">"groupEnd"</span>, <span class="string">"info"</span>, <span class="string">"log"</span>, <span class="string">"markTimeline"</span>, <span class="string">"profile"</span>, <span class="string">"profileEnd"</span>,</div><div class="line">    <span class="string">"select"</span>, <span class="string">"table"</span>, <span class="string">"time"</span>, <span class="string">"timeEnd"</span>, <span class="string">"timeStamp"</span>, <span class="string">"timeline"</span>,</div><div class="line">    <span class="string">"timelineEnd"</span>, <span class="string">"trace"</span>, <span class="string">"warn"</span>];</div><div class="line">  <span class="keyword">var</span> length = methods.length;</div><div class="line">  <span class="keyword">var</span> <span class="built_in">console</span> = (<span class="built_in">window</span>.console = <span class="built_in">window</span>.console || &#123;&#125;);</div><div class="line">  <span class="keyword">var</span> method;</div><div class="line">  <span class="keyword">var</span> noop = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">  <span class="keyword">while</span> (length--) &#123;</div><div class="line">    method = methods[length];</div><div class="line">    <span class="comment">// define undefined methods as noops to prevent errors</span></div><div class="line">    <span class="keyword">if</span> (!<span class="built_in">console</span>[method])</div><div class="line">      <span class="built_in">console</span>[method] = noop;</div><div class="line">  &#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p><strong>注意将上面的代码需要放在console对象使用之前</strong></p>
+<p><strong>方案一：</strong> 比较精简，我们只需要判断如果console对象是undefined，则给它增加一个log方法。这个方案只能让console.log正常运行，console的其它方法依然会报错（一般我们使用log方法比较多，所以一般方案一就足够了）</p>
+<p><strong>方案二：</strong> 是一个比较全方案，所有的console方法都能够在ie低版本下不报错</p>
+<p>大家可以根据自己的情况选择解决方案</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/15/console对象在ie下undefined的BUG以及解决方案/" data-id="cj0wdr7im0000k4qnuo89ai1q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/12/如何使用XX-net翻墙（iPhone篇）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何使用XX-net翻墙（iPhone篇）
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/user-select和onmousemove混用的坑/">user-select和onmousemove混用的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/12/如何使用XX-net翻墙（iPhone篇）/">如何使用XX-net翻墙（iPhone篇）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/15/console对象在ie下undefined的BUG以及解决方案/">console对象在ie下undefined的BUG以及解决方案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

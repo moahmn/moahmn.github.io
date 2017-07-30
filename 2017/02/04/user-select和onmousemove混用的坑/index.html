@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>user-select和onmousemove混用的坑 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在项目中写了一个音乐播放器，当中就少不了拖动控制音量、播放位置等等，但是在拖动的过程中经常会选中周边的文字，这样就会导致onmouseup事件没办法触发（这个问题还在寻找答案，占坑后面补上），很自然的我就想到了user-select:
+123456789.unselectable &amp;#123;  -moz-user-select: none;  -webkit-user-select: non">
+<meta property="og:type" content="article">
+<meta property="og:title" content="user-select和onmousemove混用的坑">
+<meta property="og:url" content="http://yoursite.com/2017/02/04/user-select和onmousemove混用的坑/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近在项目中写了一个音乐播放器，当中就少不了拖动控制音量、播放位置等等，但是在拖动的过程中经常会选中周边的文字，这样就会导致onmouseup事件没办法触发（这个问题还在寻找答案，占坑后面补上），很自然的我就想到了user-select:
+123456789.unselectable &amp;#123;  -moz-user-select: none;  -webkit-user-select: non">
+<meta property="og:updated_time" content="2017-02-04T16:00:02.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="user-select和onmousemove混用的坑">
+<meta name="twitter:description" content="最近在项目中写了一个音乐播放器，当中就少不了拖动控制音量、播放位置等等，但是在拖动的过程中经常会选中周边的文字，这样就会导致onmouseup事件没办法触发（这个问题还在寻找答案，占坑后面补上），很自然的我就想到了user-select:
+123456789.unselectable &amp;#123;  -moz-user-select: none;  -webkit-user-select: non">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-user-select和onmousemove混用的坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/04/user-select和onmousemove混用的坑/" class="article-date">
+  <time datetime="2017-02-04T15:02:39.000Z" itemprop="datePublished">2017-02-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      user-select和onmousemove混用的坑
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在项目中写了一个音乐播放器，当中就少不了拖动控制音量、播放位置等等，但是在拖动的过程中经常会选中周边的文字，这样就会导致onmouseup事件没办法触发（这个问题还在寻找答案，占坑后面补上），很自然的我就想到了user-select:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="selector-class">.unselectable</span> &#123;</div><div class="line">  <span class="attribute">-moz-user-select</span>: none;</div><div class="line">  <span class="attribute">-webkit-user-select</span>: none;</div><div class="line">  <span class="attribute">-ms-user-select</span>: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">none</span><span class="selector-pseudo">:The</span> <span class="selector-tag">text</span> <span class="selector-tag">of</span> <span class="selector-tag">the</span> <span class="selector-tag">element</span> <span class="selector-tag">and</span> <span class="selector-tag">sub-elements</span> <span class="selector-tag">will</span> <span class="selector-tag">not</span> <span class="selector-tag">be</span> <span class="selector-tag">able</span> <span class="selector-tag">to</span> <span class="selector-tag">be</span> <span class="selector-tag">selected</span>. <span class="selector-tag">Selection</span> <span class="selector-tag">can</span> <span class="selector-tag">contain</span> <span class="selector-tag">these</span> <span class="selector-tag">elements</span>.</div><div class="line">翻译过来就是元素及其子元素都不能够被选中</div></pre></td></tr></table></figure>
+<p>问题似乎很愉快的解决了，文字不再会被选中，也就不会导致onmouseup无法触发的问题。</p>
+<p>但是在后面调试的过程中我发现，当我拖动元素的时候会出现一个禁止拖动的警告。我反复的检查了我拖拽的代码，发现当中没有任何问题，后来突然回想起来当我onmousedown的时候我在播放器的最外层添加了一个unselectable的一个类，这个时候播放器内的任何元素都不能被选中了，冲突在这时候就产生了，user-select:none的目的是让元素不能被选中，而拖拽时这个元素是必然要被选中的，问题找出来了，下面就是要解决这个问题，解决也简单，我只是要文字不被选中，那么我只需要在不希望被选中的元素中添加unselectable这个类。</p>
+<p>踩了坑记录下，希望以后不要犯同样的错误。</p>
+<p>最后祝大家新的一年工作顺利吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/04/user-select和onmousemove混用的坑/" data-id="cj0wdr7j20003k4qnmrm1szel" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/30/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/12/如何使用XX-net翻墙（iPhone篇）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何使用XX-net翻墙（iPhone篇）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/user-select和onmousemove混用的坑/">user-select和onmousemove混用的坑</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/12/如何使用XX-net翻墙（iPhone篇）/">如何使用XX-net翻墙（iPhone篇）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/15/console对象在ie下undefined的BUG以及解决方案/">console对象在ie下undefined的BUG以及解决方案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

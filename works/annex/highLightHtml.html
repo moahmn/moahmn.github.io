@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中国记忆</title>
+	<style type="text/css">
+	mark{
+		background: yellow;
+		color:#000;
+	}
+	</style>
+</head>
+<body>
+	<div id="highLightContainer">
+		
+	</div>
+	
+	
+	<script type="text/javascript">
+		(function(){
+
+			function format(str){
+				var resultObject={};
+				var formatValue="";
+				//正则替换
+				if(typeof str==="string"){
+					formatValue=str.replace(/[=&]/g,function(v){
+						return v=="=" ? ":" : ",";
+					});
+
+					//填入对象
+					formatValue.split(",").forEach(function(n){
+						var pos=n.indexOf(":");
+						var key=n.substring(0,pos);
+						var value=n.substring(pos+1);
+						resultObject[key]=decodeURIComponent(value);			
+					});
+					return resultObject;
+				}else{
+					throw new Error('请传入String类型参数');
+				}
+
+			}
+
+		var searchField = format(window.annexKeyWordInfo),
+		 	address = searchField.address,
+		 	keyWord = searchField.keyWord,
+		 	keyWordParticipleUrl = searchField.keyWordParticipleUrl,//分词接口
+		 	participleDataKey = searchField.participleDataKey;//分词接口传递参数的key
+		 	 
+
+ 		$.get(address,function(data){
+ 			$('#highLightContainer').append(data);
+ 			var instance = new Mark(document.getElementById('highLightContainer'));
+ 			//提供分词接口先分词后再高亮
+ 			if(keyWordParticipleUrl.length > 0){
+	  			$.ajax({
+	 				type:'POST',
+	 				url:keyWordParticipleUrl,
+	 				data:{participleDataKey:keyWord},
+	 				dataType:'json',
+	 				success:function(data){
+	 					if(data.result === 0){
+	 						instance.mark(data.content.content);
+	 					}
+	 				},error:function(){
+	 					console.log('ajax error');
+	 				}
+	 			})				
+ 			}else{
+ 			//没有提供分词接口直接高亮关键字
+ 				instance.mark(keyWord);
+ 			} 
+ 		})
+
+		}());
+
+
+		 	 
+	</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>	
+	<div id="b"></div>
+	<script type="text/javascript" src="jquery-1.12.2.min.js"></script>
+	<script type="text/javascript">
+	$.get('../web/viewer.html',function(data){
+		$('#b').append(data);
+	})
+	</script>
+</body>
+</html>

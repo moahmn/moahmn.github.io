@@ -1,0 +1,196 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.annex-items a{
+	color:#fff;
+	text-decoration: none;
+}
+.annex-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.slick-slide:focus{
+    outline: 0!important;
+}
+.annex-items{
+	display: inline-block;
+ 	padding: 0 8px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+.annex-item-slick img{
+	margin: 0 auto;
+}
+.annex-item-slick{
+	position: relative;
+}
+.annex-pic{
+	background: #e7505a;
+}
+.annex-audio{
+	background: #32c5d2;
+}
+.annex-video{
+	background: #3598dc;
+}
+.annex-html{
+	background: #8e44ad;
+}
+.annex-other{
+    background: #3d6f39;	
+}
+.annex-pdf{
+	background: #95a5a6;
+}
+.annex-mask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 99;
+    opacity: .7;
+    filter: alpha(opacity=70);
+}
+.annex-relative{
+	position: relative;	
+}
+.annex-pop{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    background: #fff;
+    border-radius: 4px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.annex-slick-layer{
+    width: 600px;
+    padding: 10px;
+}
+.annex-audio-layer{
+    width: 400px;
+}
+.annex-top {
+    padding: 5px 0; 
+}
+.annex-video-layer{
+    width: 600px;
+    height: auto;
+}
+.annex-resource-link{
+    font-size: 14px;
+    color: #004988;
+    padding: 5px 5px 5px 10px;
+}
+li.annex-resource-link:hover,
+.annex-active{
+    background: #f1f1f1;
+}
+.annex-pop li{
+    list-style-type: none;
+}
+#annex-toolbar a{
+	margin-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    color: #004988;
+}
+#annex-toolbar a{
+	text-decoration: none;
+}
+.annex-pop audio,
+.annex-pop video{
+	width: 100%;
+}
+.annex-html-layer{
+    width: 60%;
+    height: 50%;
+}
+
+.annex-close{
+	font-style: normal;
+    color: #0a0808;
+    z-index: 101;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+}
+#annexHtmlContent{
+    padding: 10px;
+    overflow-y: scroll;
+    height: 300px;
+    word-break: break-word;
+}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*+height:1%;}
+
+.annex-toolbar{
+    float: right;
+    display: none;
+}
+.annex-toolbar a{
+    display: inline-block;
+    width:19px;
+    height:19px;
+    margin:0 4px;
+    background: url(../resource/sprite.png);
+}
+ 
+.annex-toolbar .blowup{
+    background-position:-30px 0;
+}
+
+.annex-toolbar .close{
+    background-position:-59px 0;
+}
+
+.annex-pop a:focus,
+.annex-pop img:focus{
+    outline: none;
+}
+
+[img-show=true],
+[desc-show=true]{
+    display: inline-block;
+}
+[img-show=false],
+[desc-show=false]{
+    display: none;
+}
+
+.atlasDesc{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 70px;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 20px;
+    z-index: 100;
+    transition: bottom .4s;
+    -webkit-transition: bottom .4s;
+    color: #fff;
+}
+.atlasDesc:hover {
+    bottom: 0;
+}
+
+.imgAnnexOuterLayter{
+    position: relative;
+}
+.imgAnnexOuterLayter img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}

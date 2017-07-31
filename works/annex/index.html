@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="styles/slick.css">
+	<link rel="stylesheet" href="styles/slick-theme.css">
+	<link rel="stylesheet" href="styles/annex.css">
+
+</head>
+<body>
+	<div id="annexShowWrapper">
+		<ul>
+			<li data-txt="图片" data-url="resource/1.jpg,resource/2.jpg,resource/5.jpg"  data-names="图片名1,图片名2,图片名3" data-desc="描述1s" class="annex-items annex-pic">
+				<a href="javascript:void(0)">图片</a>
+			</li>
+			<li data-txt="音频" data-url="resource/audio1.mp3,resource/audio2.mp3"  class="annex-items annex-audio" data-names="音频1,音频2">
+				<a href="javascript:void(0)">音频</a>
+			</li>
+			<li data-txt="视频" data-url="resource/sp1.mp4"  class="annex-items annex-video" data-names="视频1">
+				<a href="javascript:void(0)">视频</a>
+			</li>
+			<li data-txt="HTML" data-url="address=http://127.0.0.1:9000/public/55cc68954b3a743d0af4376f/5716042be4b0c96865c0f754/0138374b1ba74dc2af56e55428fa50af.html&keyWord=ml"  class="annex-items annex-html" data-names="html1">
+				<a href="javascript:void(0)">HTML</a>
+			</li>
+			<li class="annex-items annex-pdf">
+				<a href="pdfjs/web/viewer.html?file=../../resource/cdec9ff0795b4bbabcefee6d7298d797.pdf" target="_blank">PDF</a>
+			</li>
+			
+		</ul>
+	</div>
+	<a href="README.html" target="_blank" style="margin-top: 10px;
+    display: block;">使用文档配置说明</a>
+	<div class="annex-pop clearfix" id="annexPopUp"></div>
+	<script type="text/javascript" src="script/jquery-1.12.2.min.js"></script>
+	<script type="text/javascript" src="script/slick.js"></script>
+	<script type="text/javascript" src="script/mark.js"></script>
+	<script type="text/javascript" src="script/annexShow.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			new AnnneShow({
+
+ 				//'clickMaskClose':false
+			});			
+		}
+
+	</script>
+</body>
+</html>

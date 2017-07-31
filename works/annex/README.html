@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="https://assets-cdn.github.com/assets/frameworks-2d2d4c150f7000385741c6b992b302689ecd172246c6428904e0813be9bceca6.css">
+	<link rel="stylesheet" href="https://assets-cdn.github.com/assets/frameworks-2d2d4c150f7000385741c6b992b302689ecd172246c6428904e0813be9bceca6.css">
+	<link rel="stylesheet" href="https://assets-cdn.github.com/assets/site-cfab053e93f0e27f4c63d4ff6b7957bd25f711667fe678e747f8a4d88c47b38d.css">
+	<style type="text/css">
+	pre{
+		padding: 16px;
+	    overflow: auto;
+	    font-size: 85%;
+	    line-height: 1.45;
+	    background-color: #f6f8fa;
+	    border-radius: 3px;
+	}
+	.markdown-body table {
+	    display: block;
+	    width: 100%;
+	    overflow: auto;
+	}
+	.markdown-body table th, .markdown-body table td {
+	    padding: 6px 13px;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-color: rgb(223, 226, 229);
+	    border-image: initial;
+	}
+	.markdown-body table th {
+	    font-weight: 600;
+	}
+	table{
+		margin: 10px 0;
+	}
+	</style>
+</head>
+<body>
+	<article class='markdown-body'>
+		<h1 style="text-align:center;">annexShow使用说明</h1>
+		<h3>head标签引入CSS</h3> 
+		<pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>styles/slick.css<span class="pl-pds">"</span></span>/&gt;<br><span class="pl-c">&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>styles/slick-theme.css<span class="pl-pds">"</span></span>/&gt;<br><span class="pl-c">&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>styles/annex.css<span class="pl-pds">"</span></span>/&gt;</pre>
+		<h3>在body结束标签前引入JS</h3>
+		<pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>script/jquery-1.12.2.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;<br>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>script/slick.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;<br>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>script/mark.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;<span>//可选，在需要显示HTML关键字高亮时引入</span><br>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>script/annexShow.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre>
+		<h3>html结构</h3>
+		<pre>&lt;<span class="pl-ent">div</span><span class="pl-e"> id</span>=<span class="pl-s"><span class="pl-pds">'</span>annexShowWrapper<span class="pl-pds">'</span></span>&gt;
+ &lt;<span class="pl-ent">ul</span>&gt;
+    &lt;<span class="pl-ent">li <span class="pl-e">data-txt=<span class="pl-s">"图片"</span></span> <span class="pl-e">data-url=<span class="pl-s">"resource/1.jpg,resource/2.jpg,resource/4.jpg"</span></span> <span class="pl-e">data-names=<span class="pl-s">"图片名1,图片名2,图片名3"</span></span> <span class="pl-e">data-desc=<span class="pl-s">"描述1,描述2,描述3"</span></span> <span class="pl-e">class=<span class="pl-s">"annex-items annex-pic"</span></span></span>&gt;&lt;<span class="pl-ent">a <span class="pl-e">href=<span class="pl-s">"javascript:void(0)"</span></span></span>&gt;图片&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li <span class="pl-e">data-txt=<span class="pl-s">"音频"</span></span> <span class="pl-e">data-url=<span class="pl-s">"resource/audio1.mp3,resource/audio2.mp3"</span></span> <span class="pl-e">data-names=<span class="pl-s">"音频1,音频2"</span></span> <span class="pl-e">class=<span class="pl-s">"annex-items annex-audio"</span></span></span>&gt;&lt;<span class="pl-ent">a <span class="pl-e">href=<span class="pl-s">"javascript:void(0)"</span></span></span>&gt;音频&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li <span class="pl-e">data-txt=<span class="pl-s">"视频"</span></span> <span class="pl-e">data-url=<span class="pl-s">"resource/sp1.mp4"</span></span> <span class="pl-e">data-names=<span class="pl-s">"视频1"</span></span> <span class="pl-e">class=<span class="pl-s">"annex-items annex-video"</span></span></span>&gt;&lt;<span class="pl-ent">a <span class="pl-e">href=<span class="pl-s">"javascript:void(0)"</span></span></span>&gt;视频&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li <span class="pl-e">data-txt=<span class="pl-s">"HTML"</span></span> <span class="pl-e">data-url=<span class="pl-s">"address=http://127.0.0.1:9000/public/55cc68954b3a743d0af4376f/5716042be4b0c96865c0f754/0138374b1ba74dc2af56e55428fa50af.html&keyWord=ml"</span></span>  <span class="pl-e">class=<span class="pl-s">"annex-items annex-html"</span></span></span>&gt;&lt;<span class="pl-ent">a <span class="pl-e">href=<span class="pl-s">"javascript:void(0)"</span></span></span>&gt;HTML&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li <span class="pl-e">class=<span class="pl-s">"annex-items annex-pdf"</span></span>&gt;&lt;<span class="pl-ent">a <span class="pl-e">href=<span class="pl-s">"pdfjs/web/viewer.html?file=../../resource/cdec9ff0795b4bbabcefee6d7298d797.pdf"</span></span></span> <span class="pl-e">target=<span class="pl-s">"_blank"</span></span>&gt;PDF&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
+ &lt;<span class="pl-ent">/ul</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;
+
+&lt;<span class="pl-ent">div <span class="pl-e">class=</span><span class="pl-s">"annex-pop clearfix" id="annexPopUp"</span></span>&gt;&lt;/div&gt;
+</pre>
+
+	 <table>
+	 	<tr>
+	 		<th>属性</th>
+	 		<th>描述</th>
+	 	</tr>
+	 	<tbody>
+	 		<tr>
+	 			<td>data-txt</td>
+	 			<td>弹层显示的四种类型：图片、音频、视频、HTML（重要，必须传递）</td>
+	 		</tr>
+	 		<tr>
+	 			<td>data-url</td>
+	 			<td>需要显示的附件url地址，除了HTML其余三种附件都可以传递多个附件地址，使用","分隔。data-txt类型为HTML的data-url传参格式为：address="需要显示的附件地址"&keyWord="需要高亮的关键字"，请自行解决跨域问题</td>
+	 		</tr>
+	 		<tr>
+	 			<td>data-names</td>
+	 			<td>附件的名字，可传递多个(使用","分隔)，和data-url属性是一对一的关系，若没有传递，则使用附件url地址的最后一个路径分隔符至结尾的字符串。</td>
+	 		</tr>
+	 		<tr>
+	 			<td>data-desc</td>
+	 			<td>对图片的描述，该属性只作用于data-txt="图片"的类型,可传递多个(使用","分隔)，和data-url属性是一对一的关系，若没有传递，则描述显示为空</td>
+	 		</tr>
+	 	</tbody>
+	 </table>
+	<p style="color:red">*如果需要显示pdf附件（借助pdf.js）,参考li最后一个节点,（不需要传递任何data参数）只需要a标签的href设置为pdfjs/web/viewer.html?file=pdf附件地址</p>
+
+	 <h3>调用</h3> 
+		<pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> &gt;
+	window.onload = function(){
+	  new AnnneShow({});			
+	}
+&lt;/<span class="pl-ent">script</span>&gt;</pre>
+	<h3>配置项</h3>
+	<table>
+		<tr>
+			<th>选项</th>
+			<th>类型</th>
+			<th>默认值</th>
+			<th>描述</th>
+		</tr>
+		<tr>
+			<td>showImgName</td>
+			<td>Boolean</td>
+			<td>true</td>
+			<td>是否显示图片的名称，默认显示</td>
+		</tr>
+		<tr>
+			<td>showImgDesc</td>
+			<td>Boolean</td>
+			<td>true</td>
+			<td>是否显示图片描述，默认显示</td>
+		</tr>
+		<tr>
+			<td>clickMaskClose</td>
+			<td>Boolean</td>
+			<td>true</td>
+			<td>是否在点击遮罩层时触发与关闭按钮相同的动作</td>
+		</tr>
+		<tr>
+			<td>highLightHtmlPath</td>
+			<td>String</td>
+			<td>"./"</td>
+			<td>配置highLightHtmlPath.html这个文件的相对位置，默认与demo.html在同一级目录，如果换了位置，请配置正确的相对位置或者绝对位置（相对位置相对于demo.html）</td>
+		</tr>
+
+		<tr>
+			<td>keyWordParticipleUrl</td>
+			<td>String</td>
+			<td>""</td>
+			<td>关键字分词接口，如果提供分词接口，则对关键字分词后再进行高亮，否则直接对关键字进行高亮</td>
+		</tr>
+		<tr>
+			<td>participleDataKey</td>
+			<td>String</td>
+			<td>""</td>
+			<td>接口传递关键字参数的key</td>
+		</tr>
+ 
+		<tr>
+			<td>annexSlickLayer</td>
+			<td>Object</td>
+			<td>{'width': 600,'height':'auto'}</td>
+			<td>图片弹层的样式配置选项，请不要配置固定高度，让高度自适应，可传入任何修改样式的属性</td>
+		</tr>
+		<tr>
+			<td>annexAudioLayer</td>
+			<td>Object</td>
+			<td>{'width': 400,'height':'auto'}</td>
+			<td>音频弹层的样式配置选项，可传入任何修改样式的属性</td>
+		</tr>
+		<tr>
+			<td>annexVideoLayer</td>
+			<td>Object</td>
+			<td>{'width': 600,'height':'auto'}</td>
+			<td>视频弹层的样式配置选项，可传入任何修改样式的属性</td>
+		</tr>
+		<tr>
+			<td>annexHtmlLayer</td>
+			<td>Object</td>
+			<td>{'width':'60%','height':'auto'}</td>
+			<td>HTML弹层的样式配置选项，可传入任何修改样式的属性</td>
+		</tr>		
+	</table>
+
+	</article>
+</body>
+</html>
